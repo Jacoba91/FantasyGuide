@@ -1,0 +1,99 @@
+/* CSS for the WelcomePage, using modern and clean design principles and ensuring responsiveness */
+
+.welcome-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url('https://media-api.xogrp.com/images/0dcb2a37-6d25-4a80-a541-853e6e44b54b~cr_0.90.1991.1424') no-repeat center center fixed; 
+    background-size: cover;
+}
+
+.content {
+    background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 500px; /* Limit width for better readability */
+    display: flex;            /* Enables Flexbox */
+    flex-direction: column;   /* Aligns children vertically */
+    justify-content: center;  /* Centers children vertically */
+    align-items: center;      /* Centers children horizontally */
+    
+}
+
+.content h1 {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.content p {
+    font-size: 1.2em;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.cssbuttons-io-button {
+    background: #0587a1;
+    color: white;
+    font-family: inherit;
+    padding: 0.35em;
+    padding-left: 1.2em;
+    font-size: 17px;
+    font-weight: 500;
+    border-radius: 0.9em;
+    border: none;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    box-shadow: inset 0 0 1.6em -0.6em #0587a1;
+    overflow: hidden;
+    position: relative;
+    height: 2.8em;
+    padding-right: 3.3em;
+    cursor: pointer;
+  }
+  
+  .cssbuttons-io-button .icon {
+    background: white;
+    margin-left: 1em;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.2em;
+    width: 2.2em;
+    border-radius: 0.7em;
+    box-shadow: 0.1em 0.1em 0.6em 0.2em #0587a1;
+    right: 0.3em;
+    transition: all 0.3s;
+  }
+  
+  .cssbuttons-io-button:hover .icon {
+    width: calc(100% - 0.6em);
+  }
+  
+  .cssbuttons-io-button .icon svg {
+    width: 1.1em;
+    transition: transform 0.3s;
+    color: #0587a1;
+  }
+  
+  .cssbuttons-io-button:hover .icon svg {
+    transform: translateX(0.1em);
+  }
+  
+  .cssbuttons-io-button:active .icon {
+    transform: scale(0.95);
+  }
+
+/* Responsive font sizes for smaller screens */
+@media screen and (max-width: 600px) {
+    .content h1 {
+        font-size: 2em; /* Smaller font size for smaller screens */
+    }
+
+    .content p {
+        font-size: 1em; /* Smaller font size for smaller screens */
+    }
+}
