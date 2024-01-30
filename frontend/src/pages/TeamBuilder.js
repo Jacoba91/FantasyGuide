@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './TeamBuilder.css';
 
 const TeamBuilder = () => {
@@ -11,29 +12,27 @@ const TeamBuilder = () => {
         Bench: Array(6).fill({ name: null, photo: null }),
     });
 
-    const addPlayerToRoster = (player) => {
-        // Implement logic to add player based on position and roster rules
-        // Example: Check if the position is already filled, add to Flex if applicable, etc.
-    };
+    const navigate = useNavigate();
 
-    const dropPlayerFromRoster = (position, index) => {
-        // Implement logic to remove player from roster
-        // Example: Remove player from specified position
+    const handleAddPlayerClick = (position) => {
+        // Redirect to MainContent with a filter for the position
+        navigate(`/home?position=${position}`);
     };
 
     const renderRosterSlot = (position, index = null) => {
         const player = index !== null ? roster[position][index] : roster[position];
         return (
-            <div className="roster-slot">
+            <div className="roster-slot" onClick={() => handleAddPlayerClick(position)}>
                 <div className="profile-photo">
                     {player.photo ? (
-                        <img src={player.photo} alt={player.name} />
+                        <img src={player.photo} alt={player.name || 'Player Photo'} />
                     ) : (
-                        <div></div> // Placeholder if no photo is available
+                        <div className="photo-placeholder"></div>
                     )}
                 </div>
-                {position} {index !== null ? index + 1 : ''}: {player.name ? player.name : 'Empty'}
-                {/* Add buttons or links for adding/dropping players */}
+                <div className="player-info">
+                    {position} {index !== null ? index + 1 : ''}: {player.name ? player.name : 'Empty'}
+                </div>
             </div>
         );
     };

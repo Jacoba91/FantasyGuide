@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import './MainContent.css';
 
 const columnOrder = ['Rank', 'Player', 'Tm', 'FantPos', 'Age', 'G', 'GS', 'Cmp', 'Att', 'Yds', 'TD', 'Int', 'Att', 'Yds', 'Y/A', 'TD', 'Tgt', 'Rec', 'Yds', 'Y/R', 'TD', 'Fmb', 'FL', 'TD', '2PM', '2PP', 'FantPt', 'PPR', 'DKPt', 'FDPt', 'VBD', 'PosRank', 'OvRank'];
@@ -9,8 +10,34 @@ const MainContent = () => {
     const [searchQuery, setSearchQuery] = useState(''); // state for the search query
     const [selectedPosition, setSelectedPosition] = useState('All'); // New state for selected position
     const [selectedTeam, setSelectedTeam] = useState('All') // state for selected team
+    const [lockedPosition, setLockedPosition] = useState(null); // State for URL-based position
+
+    // Use useLocation to access query parameters
+    const location = useLocation();
 
     useEffect(() => {
+        // Function to parse query parameters
+        const searchParams = new URLSearchParams(location.search);
+        const positionFromURL = searchParams.get('position');
+    
+        // Set lockedPosition based on the URL parameter
+        setLockedPosition(positionFromURL ? positionFromURL : null);
+
+        // Update lockedPosition if position is provided in the URL
+        // Check if the position from URL is 'Flex' and handle accordingly
+        if (positionFromURL) {
+            if (positionFromURL === 'Flex') {
+                // Set lockedPosition for 'Flex' as JSON string
+                setLockedPosition('{"flexPositions":["WR","TE","RB","FB"]}');
+            } else {
+                // For other positions, set as normal
+                setLockedPosition(positionFromURL);
+            }
+        } else {
+            setLockedPosition(null); // Unlock if no position in URL
+        }
+        
+        // API data fetch for main stats table
       fetch('/players')
           .then(response => {
               if (!response.ok) {
@@ -20,17 +47,32 @@ const MainContent = () => {
           })
           .then(data => setPlayers(data)) // Update here
           .catch(error => console.error('Error:', error));
-    }, []);
+    }, [location]);
 
     // Function to filter players based on the search query
     const filterPlayers = (players) => {
         return players.filter(player => {
-            const fullName = `${player['Player']}`.toLowerCase();
+            const fullName = player['Player'].toLowerCase();
             const position = player['FantPos'];
-            const team = player['Tm']
+            const team = player['Tm'];
             const matchesName = fullName.includes(searchQuery.toLowerCase());
-            const matchesPosition = selectedPosition === 'All' || position === selectedPosition;
             const matchesTeam = selectedTeam === 'All' || team === selectedTeam;
+    
+            // Determine effective position
+            const effectivePosition = lockedPosition || selectedPosition;
+            let matchesPosition = false;
+    
+            if (effectivePosition === 'All') {
+                matchesPosition = true;
+            } else if (effectivePosition.includes('{')) {
+                // If effectivePosition is a JSON string (for 'Flex'), parse it
+                const flexPositions = JSON.parse(effectivePosition).flexPositions;
+                matchesPosition = flexPositions.includes(position);
+            } else {
+                // Standard position check
+                matchesPosition = position === effectivePosition;
+            }
+    
             return matchesName && matchesPosition && matchesTeam;
         });
     };
@@ -72,13 +114,18 @@ const MainContent = () => {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                 />
-                <select value={selectedPosition} onChange={(e) => setSelectedPosition(e.target.value)}>
+                <select 
+                    value={lockedPosition || selectedPosition} 
+                    onChange={(e) => setSelectedPosition(e.target.value)}
+                    disabled={!!lockedPosition} // Disable if lockedPosition is set
+                >
                     <option value="All">All Positions</option>
                     <option value="QB">QB</option>
                     <option value="RB">RB</option>
                     <option value="FB">FB</option>
                     <option value="TE">TE</option>
                     <option value="WR">WR</option>
+                    <option value='{"flexPositions":["WR","TE","RB","FB"]}'>Flex</option>
                 </select>
                 <select value={selectedTeam} onChange={(e) => setSelectedTeam(e.target.value)}>
                     <option value="All">All Teams</option>
