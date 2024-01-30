@@ -26,12 +26,12 @@ const MainContent = () => {
         // Update lockedPosition if position is provided in the URL
         // Check if the position from URL is 'Flex' and handle accordingly
         if (positionFromURL) {
-            if (positionFromURL === 'Flex' || 'Bench') {
-                // Set lockedPosition for 'Flex' as JSON string
-                setLockedPosition('{"flexPositions":["WR","TE","RB","FB"]}');
+            if (positionFromURL === 'Flex') {
+                setLockedPosition('{"flexPositions":["WR","TE","RB","FB"]}'); // logic for flex
+            } else if (positionFromURL === 'Bench') {
+                setLockedPosition(null); // logic for 'Bench'
             } else {
-                // For other positions, set as normal
-                setLockedPosition(positionFromURL);
+                setLockedPosition(positionFromURL ? positionFromURL : null);
             }
         } else {
             setLockedPosition(null); // Unlock if no position in URL
