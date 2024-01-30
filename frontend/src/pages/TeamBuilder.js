@@ -3,12 +3,12 @@ import './TeamBuilder.css';
 
 const TeamBuilder = () => {
     const [roster, setRoster] = useState({
-        QB: null,
-        WR: [null, null],
-        RB: [null, null],
-        TE: null,
-        Flex: null,
-        Bench: [null, null, null, null, null, null]
+        QB: { name: null, photo: null },
+        WR: [{ name: null, photo: null }, { name: null, photo: null }],
+        RB: [{ name: null, photo: null }, { name: null, photo: null }],
+        TE: { name: null, photo: null },
+        Flex: { name: null, photo: null },
+        Bench: Array(6).fill({ name: null, photo: null }),
     });
 
     const addPlayerToRoster = (player) => {
@@ -25,7 +25,14 @@ const TeamBuilder = () => {
         const player = index !== null ? roster[position][index] : roster[position];
         return (
             <div className="roster-slot">
-                {position} {index !== null ? index + 1 : ''}: {player ? player : 'Empty'}
+                <div className="profile-photo">
+                    {player.photo ? (
+                        <img src={player.photo} alt={player.name} />
+                    ) : (
+                        <div>N/A</div> // Placeholder if no photo is available
+                    )}
+                </div>
+                {position} {index !== null ? index + 1 : ''}: {player.name ? player.name : 'Empty'}
                 {/* Add buttons or links for adding/dropping players */}
             </div>
         );
