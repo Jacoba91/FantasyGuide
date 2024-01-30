@@ -1,20 +1,37 @@
-.team-builder {
+.team-builder-wrap {
+    background: url('https://i0.wp.com/iolaregister.s3.amazonaws.com/production/uploads/2022/11/artificial-turf.jpg?fit=4247%2C1958&ssl=1') no-repeat center center fixed; 
+    background-size: cover;
+    padding-top: 45px;
+    padding-bottom: 45px;
+}
+
+.team-sheet {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 20px;
-    background-color: #c16e10; /* White background like paper */
-    border: 1px solid #ccc; /* Border for paper-like appearance */
+    background-color: #c16e10;
+    border: 3px solid #000000; 
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); /* Shadow for depth */
     border-radius: 10px; /* Slightly rounded corners for the paper */
     max-width: 600px; /* Adjust width as needed */
     margin: auto;
-    margin: 30px 45px;
+    margin: 0 45px;
+    
+}
+
+.roster-title {
+    background-color: rgba(255, 255, 255, 0.671);
+    border: 2px solid #000000;
+    text-decoration: none;
+    border-radius: 15px;
+    padding: 10px 60px;
 }
 
 .roster {
     width: 100%;
+    border: 2px solid #000000;
 }
 
 .roster-slot {
@@ -22,8 +39,12 @@
     align-items: center; /* Align items vertically */
     background-color: #f8f8f8; /* Slightly off-white for each slot */
     border-bottom: 1px solid #ddd; /* Border between slots */
-    width: 93%;
+    width: 93.3%;
     padding: 10px 20px;
+}
+
+.roster-slot:hover {
+    background-color: rgb(147, 147, 147);
 }
 
 .profile-photo {

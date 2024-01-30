@@ -29,7 +29,7 @@ const TeamBuilder = () => {
                     {player.photo ? (
                         <img src={player.photo} alt={player.name} />
                     ) : (
-                        <div>N/A</div> // Placeholder if no photo is available
+                        <div></div> // Placeholder if no photo is available
                     )}
                 </div>
                 {position} {index !== null ? index + 1 : ''}: {player.name ? player.name : 'Empty'}
@@ -39,17 +39,25 @@ const TeamBuilder = () => {
     };
 
     return (
-        <div className="team-builder">
-            <h1>Team Builder</h1>
-            <div className="roster">
-                {renderRosterSlot('QB')}
-                {roster.WR.map((_, index) => renderRosterSlot('WR', index))}
-                {roster.RB.map((_, index) => renderRosterSlot('RB', index))}
-                {renderRosterSlot('TE')}
-                {renderRosterSlot('Flex')}
-                {roster.Bench.map((_, index) => renderRosterSlot('Bench', index))}
+        <div className='team-builder-wrap'>
+            <div className="team-sheet">
+                <h1 className='roster-title'>My Roster</h1>
+                <div className="roster">
+                    {renderRosterSlot('QB')}
+                    {roster.WR.map((_, index) => renderRosterSlot('WR', index))}
+                    {roster.RB.map((_, index) => renderRosterSlot('RB', index))}
+                    {renderRosterSlot('TE')}
+                    {renderRosterSlot('Flex')}
+                    {roster.Bench.map((_, index) => renderRosterSlot('Bench', index))}
+                </div>
+                {/* Add UI for player selection */}
             </div>
-            {/* Add UI for player selection */}
+            <div className="team-sheet">
+                <h1 className='roster-title'>Team Report</h1>
+                <div className="team-report">
+                </div>
+                {/* Add UI for player selection */}
+            </div>
         </div>
     );
 };
