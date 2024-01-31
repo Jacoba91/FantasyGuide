@@ -92,18 +92,40 @@ const MainContent = () => {
 
     // Function for adding player
     const handleAddPlayer = (player) => {
-        const position = player.FantPos;  // Using 'FantPos' from player data
-        const index = indexFromURL !== null ? parseInt(indexFromURL) : null; // Convert to integer if not null
+        let targetPosition = player.FantPos;
+        let index = indexFromURL !== null ? parseInt(indexFromURL) : null;
+        let isFlexLocked = false;
     
-        dispatch({ 
-            type: 'ADD_PLAYER', 
-            payload: { 
-                position: position, 
-                index: index, 
-                player: { 
-                    name: player.Player, 
-                    photo: 'URL to photo' // Replace with actual logic to get photo
+        // Check if lockedPosition is a JSON string
+        if (lockedPosition && lockedPosition.startsWith('{')) {
+            try {
+                const lockedPosObj = JSON.parse(lockedPosition);
+                if (lockedPosObj.flexPositions && lockedPosObj.flexPositions.includes(player.FantPos)) {
+                    isFlexLocked = true;
                 }
+            } catch (error) {
+                console.error('Error parsing lockedPosition:', error);
+            }
+        } else if (lockedPosition && ['WR', 'RB'].includes(lockedPosition)) {
+            // Handle direct string positions like WR or RB
+            targetPosition = lockedPosition;
+        }
+    
+        // Handling Flex position
+        if (isFlexLocked) {
+            targetPosition = 'Flex';
+        } 
+        
+        else if (index !== null && lockedPosition === null) {
+            targetPosition = 'Bench';
+        }
+    
+        dispatch({
+            type: 'ADD_PLAYER',
+            payload: {
+                targetPosition,
+                player: { name: player.Player, photo: 'URL to photo' },
+                index
             }
         });
     

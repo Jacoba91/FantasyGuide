@@ -16,32 +16,18 @@ const initialRosterState = {
 const teamReducer = (state, action) => {
     switch (action.type) {
         case 'ADD_PLAYER':
-            const { position, player, index } = action.payload;
+            const { targetPosition, player, index } = action.payload;
 
-            if (!position) {
-                console.error("Position is null in ADD_PLAYER action");
-                return state;
-            }
-
-            if (Array.isArray(state.team[position])) {
-                // Array-based position logic
-                if (typeof index === 'number' && index >= 0 && index < state.team[position].length) {
-                    let updatedArray = [...state.team[position]];
-                    updatedArray[index] = player; // Update the specific slot
-                    return {
-                        ...state,
-                        team: { ...state.team, [position]: updatedArray }
-                    };
-                } else {
-                    console.error("Invalid index for position:", position, "Index:", index);
-                    return state;
+            if (['WR', 'RB', 'Bench'].includes(targetPosition)) {
+                let updatedArray = [...state.team[targetPosition]];
+                if (index !== null && index >= 0 && index < updatedArray.length) {
+                    updatedArray[index] = player;
                 }
+                return { ...state, team: { ...state.team, [targetPosition]: updatedArray } };
+            } else if (targetPosition === 'Flex') {
+                return { ...state, team: { ...state.team, Flex: player } };
             } else {
-                // For single-slot positions (e.g., QB, TE, Flex)
-                return {
-                    ...state,
-                    team: { ...state.team, [position]: player }
-                };
+                return { ...state, team: { ...state.team, [targetPosition]: player } };
             }
         // ... other actions ...
         default:
