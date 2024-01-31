@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState, useEffect, useContext } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { TeamContext } from '../TeamContext';
+
 import './MainContent.css';
 
 const columnOrder = ['Rank', 'Player', 'Tm', 'FantPos', 'Age', 'G', 'GS', 'Cmp', 'Att', 'Yds', 'TD', 'Int', 'Att', 'Yds', 'Y/A', 'TD', 'Tgt', 'Rec', 'Yds', 'Y/R', 'TD', 'Fmb', 'FL', 'TD', '2PM', '2PP', 'FantPt', 'PPR', 'DKPt', 'FDPt', 'VBD', 'PosRank', 'OvRank'];
@@ -11,42 +13,53 @@ const MainContent = () => {
     const [selectedPosition, setSelectedPosition] = useState('All'); // New state for selected position
     const [selectedTeam, setSelectedTeam] = useState('All') // state for selected team
     const [lockedPosition, setLockedPosition] = useState(null); // State for URL-based position
+    const [isTeamBuilding, setIsTeamBuilding] = useState(false); // State for team build
+
+    const [positionFromURL, setPositionFromURL] = useState(null);
+    const [indexFromURL, setIndexFromURL] = useState(null);
 
     // Use useLocation to access query parameters
     const location = useLocation();
+    const navigate = useNavigate();
+    
+    // Team context
+    const { dispatch } = useContext(TeamContext);
 
     useEffect(() => {
         // Function to parse query parameters
         const searchParams = new URLSearchParams(location.search);
         const positionFromURL = searchParams.get('position');
+        let indexFromURL = searchParams.get('index'); // This will be a string or null
     
-        // Set lockedPosition based on the URL parameter
-        setLockedPosition(positionFromURL ? positionFromURL : null);
-
-        // Update lockedPosition if position is provided in the URL
-        // Check if the position from URL is 'Flex' and handle accordingly
+        // Resetting the lockedPosition and isTeamBuilding states
+        setLockedPosition(null);
+        setIsTeamBuilding(false);
+    
         if (positionFromURL) {
             if (positionFromURL === 'Flex') {
-                setLockedPosition('{"flexPositions":["WR","TE","RB","FB"]}'); // logic for flex
-            } else if (positionFromURL === 'Bench') {
-                setLockedPosition(null); // logic for 'Bench'
-            } else {
-                setLockedPosition(positionFromURL ? positionFromURL : null);
+                setLockedPosition('{"flexPositions":["WR","TE","RB","FB"]}');
+            } else if (positionFromURL !== 'Bench') {
+                // Apply position lock only if it's not 'Bench'
+                setLockedPosition(positionFromURL);
             }
-        } else {
-            setLockedPosition(null); // Unlock if no position in URL
+            // Enable team building mode if a position is specified
+            setIsTeamBuilding(true);
         }
-        
-        // API data fetch for main stats table
-      fetch('/players')
-          .then(response => {
-              if (!response.ok) {
-                  throw new Error('Network response was not ok');
-              }
-              return response.json();
-          })
-          .then(data => setPlayers(data)) // Update here
-          .catch(error => console.error('Error:', error));
+    
+        // Convert index to integer if it's not null
+        indexFromURL = indexFromURL !== null ? parseInt(indexFromURL) : null;
+        setIndexFromURL(indexFromURL);
+    
+        // Fetch players data
+        fetch('/players')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => setPlayers(data)) // Update here
+            .catch(error => console.error('Error:', error));
     }, [location]);
 
     // Function to filter players based on the search query
@@ -75,6 +88,26 @@ const MainContent = () => {
     
             return matchesName && matchesPosition && matchesTeam;
         });
+    };
+
+    // Function for adding player
+    const handleAddPlayer = (player) => {
+        const position = player.FantPos;  // Using 'FantPos' from player data
+        const index = indexFromURL !== null ? parseInt(indexFromURL) : null; // Convert to integer if not null
+    
+        dispatch({ 
+            type: 'ADD_PLAYER', 
+            payload: { 
+                position: position, 
+                index: index, 
+                player: { 
+                    name: player.Player, 
+                    photo: 'URL to photo' // Replace with actual logic to get photo
+                }
+            }
+        });
+    
+        navigate('/team-builder');
     };
 
     // Function to get chunks of players
@@ -172,6 +205,13 @@ const MainContent = () => {
                                     {columnOrder.map((column, columnIndex) => (
                                         <td key={columnIndex}>{player[column]}</td>
                                     ))}
+                                    {isTeamBuilding && (
+                                        <td>
+                                            <button onClick={() => handleAddPlayer(player)}>
+                                                Add Player
+                                            </button>
+                                        </td>
+                                    )}
                                 </tr>
                             ))}
                         </tbody>
