@@ -1,8 +1,10 @@
 .team-builder-wrap {
     background: url('https://i0.wp.com/iolaregister.s3.amazonaws.com/production/uploads/2022/11/artificial-turf.jpg?fit=4247%2C1958&ssl=1') no-repeat center center fixed; 
     background-size: cover;
-    padding-top: 45px;
-    padding-bottom: 45px;
+    display: flex; /* Use Flexbox for layout */
+    justify-content: space-between; /* Space out the children */
+    align-items: flex-start; /* Align items to the top */
+    padding: 20px; /* Add some padding around */
 }
 
 .team-sheet {
@@ -11,19 +13,21 @@
     align-items: center;
     justify-content: center;
     padding: 20px;
-    background-color: #c16e10;
-    border: 3px solid #000000; 
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); /* Shadow for depth */
-    border-radius: 10px; /* Slightly rounded corners for the paper */
-    max-width: 600px; /* Adjust width as needed */
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+    border: 3px solid #333333; /* Darker border for contrast */
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5); /* Enhanced shadow for depth */
+    border-radius: 15px; /* Rounded corners */
+    max-width: 600px;
     margin: auto;
-    margin: 0 45px;
-    
+    margin: 45px 45px;
+    flex: 1; /* Take up remaining space */
 }
 
 .roster-title {
-    background-color: rgba(255, 255, 255, 0.671);
-    border: 2px solid #000000;
+    color: #333333; /* Dark text for better readability */
+    font-weight: bold; /* Bold font for the title */
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+    border: 2px solid #333333;
     text-decoration: none;
     border-radius: 15px;
     padding: 10px 60px;
@@ -31,26 +35,92 @@
 
 .roster {
     width: 100%;
-    border: 2px solid #000000;
+    border: 2px solid #333333;
 }
 
 .roster-slot {
     display: flex;
-    align-items: center; /* Align items vertically */
-    background-color: #f8f8f8; /* Slightly off-white for each slot */
-    border-bottom: 1px solid #ddd; /* Border between slots */
-    width: 93.3%;
+    align-items: center;
+    background-color: #ffffff; /* Pure white for a clean look */
+    border-bottom: 1px solid #ddd; /* Subtle border */
     padding: 10px 20px;
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
 }
 
 .roster-slot:hover {
-    background-color: rgb(147, 147, 147);
+    background-color: rgba(0, 0, 0, 0.05); /* Very light grey for hover */
 }
 
 .profile-photo {
-    height: 50px; /* Adjust size as needed */
-    width: 50px;
-    background-color: #eee; /* Placeholder color, replace with actual image */
+    height: 60px; /* Adjust size as needed */
+    width: 60px;
     border-radius: 50%; /* Circular profile photo */
     margin-right: 15px; /* Space between photo and player info */
+    object-fit: cover; /* Maintain the aspect ratio */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15); /* More subtle shadow */
 }
+
+.team-report-sheet {
+    flex: 0 0 50%; /* Take up 50% of the container's width */
+    height: 50%; /* Half the vertical length of its container */
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+    padding: 20px; /* Padding inside the report */
+    border: 2px solid #333; /* Border for the report */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertically centers content */
+    text-align: center; /* Horizontally centers text */
+}
+
+.cta {
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+  
+  .cta span {
+    padding-bottom: 7px;
+    letter-spacing: 4px;
+    font-size: 14px;
+    padding-right: 15px;
+    text-transform: uppercase;
+  }
+  
+  .cta svg {
+    transform: translateX(-8px);
+    transition: all 0.3s ease;
+  }
+  
+  .cta:hover svg {
+    transform: translateX(0);
+  }
+  
+  .cta:active svg {
+    transform: scale(0.9);
+  }
+  
+  .hover-underline-animation {
+    position: relative;
+    color: black;
+    padding-bottom: 20px;
+  }
+  
+  .hover-underline-animation:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #000000;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+  }
+  
+  .cta:hover .hover-underline-animation:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }

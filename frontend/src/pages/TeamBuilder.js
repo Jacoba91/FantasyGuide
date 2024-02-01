@@ -23,12 +23,12 @@ const TeamBuilder = () => {
     const renderRosterSlot = (position, player, index = null) => {
         const displayPosition = index !== null ? `${position} ${index + 1}` : position;
         const playerName = player && player.name ? player.name : 'Empty';
-        const playerPhoto = player && player.photo ? player.photo : 'path/to/default/photo.png';
+        const playerPhoto = player && player.photo ? player.photo : 'https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg';
 
         return (
             <div className="roster-slot" onClick={() => handleSlotClick(position, index)}>
                 <div className="profile-photo">
-                    <img src={playerPhoto} alt={playerName} />
+                    <img className="profile-photo" src={playerPhoto} alt={playerName} />
                 </div>
                 <div className="player-info">
                     {displayPosition}: {playerName}
@@ -48,7 +48,7 @@ const TeamBuilder = () => {
     return (
         <div className='team-builder-wrap'>
             <div className="team-sheet">
-                <h1 className='roster-title'>My Roster</h1>
+                <h1 className='roster-title'>Lineup</h1>
                 <div className="roster">
                     {team && team.QB ? renderRosterSlot('QB', team.QB) : <div>QB Position not available</div>}
                     {renderArrayRosterSlots('WR')}
@@ -58,10 +58,26 @@ const TeamBuilder = () => {
                     {renderArrayRosterSlots('Bench')}
                 </div>
             </div>
-            <div className="team-sheet">
+            <div className="team-report-sheet">
                 <h1 className='roster-title'>Team Report</h1>
-                <div className="team-report">
-                    {/* Content for Team Report */}
+                <div className="report-content">
+                    <button class="cta">
+                        <span class="hover-underline-animation"> Generate Insights </span>
+                            <svg
+                                id="arrow-horizontal"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="30"
+                                height="10"
+                                viewBox="0 0 46 16"
+                            >
+                                <path
+                                    id="Path_10"
+                                    data-name="Path 10"
+                                    d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z"
+                                    transform="translate(30)"
+                                ></path>
+                            </svg>
+                    </button>
                 </div>
             </div>
         </div>

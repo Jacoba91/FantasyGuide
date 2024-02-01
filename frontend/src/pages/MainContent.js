@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { TeamContext } from '../TeamContext';
+import playerPhotoUrls from "/Users/jaragao/Desktop/FantasyGuide/frontend/src/components/playerPhotos.js";
+
 
 import './MainContent.css';
 
@@ -119,12 +121,22 @@ const MainContent = () => {
         else if (index !== null && lockedPosition === null) {
             targetPosition = 'Bench';
         }
+
+        const cleanPlayerName = (name) => {
+            // This regex rids of +,*
+            const regex = /[^a-zA-Z .'-]/g;
+        
+            // Replace these characters with an empty string
+            return name.replace(regex, '');
+        };
+
+        const photoUrl = playerPhotoUrls[cleanPlayerName(player.Player)] || 'https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg';
     
         dispatch({
             type: 'ADD_PLAYER',
             payload: {
                 targetPosition,
-                player: { name: player.Player, photo: 'URL to photo' },
+                player: { name: cleanPlayerName(player.Player), photo: photoUrl },
                 index
             }
         });

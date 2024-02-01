@@ -1,0 +1,48 @@
+const playerPhotoUrls = {
+    //p1
+    "Christian McCaffrey": "https://a.espncdn.com/i/headshots/nfl/players/full/3117251.png",
+    "CeeDee Lamb": "https://static.www.nfl.com/image/private/t_player_profile_landscape/f_auto/league/cqygs9e4ynnjdxstdfjq",
+    "Josh Allen": "https://static.www.nfl.com/image/private/t_headshot_desktop/league/ghmmndgjefpxziks7ntf",
+    "Tyreek Hill": "https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/3116406.png",
+    "Jalen Hurts": "https://static.clubs.nfl.com/image/private/t_editorial_landscape_12_desktop/eagles/lpktrplupwbokng4vxrx",
+    "Raheem Mostert": "https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/2576414.png",
+    "Amon-Ra St. Brown": "https://a.espncdn.com/i/headshots/nfl/players/full/4374302.png",
+    "Dak Prescott": "https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/2577417.png&w=350&h=254",
+    "Mike Evans": "https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/16737.png",
+    "Lamar Jackson": "https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/3916387.png",
+    "Sam LaPorta": "https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/4430027.png&w=350&h=254",
+    "Travis Etienne": "https://static.www.nfl.com/image/private/t_headshot_desktop/league/ne5lyv8n6elqw77yrz9w",
+    "Kyren Williams": "https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/4430737.png",
+    "Puka Nacua": "https://static.www.nfl.com/image/private/t_headshot_desktop/league/br1ovzclyrebrec6q0mp",
+    "D.J. Moore": "https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/3915416.png&w=350&h=254",
+    "Derrick Henry": "https://static.www.nfl.com/image/private/t_headshot_desktop/league/xpewyoieoj7zeub4fvff",
+    "Joe Mixon": "https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/3116385.png&w=350&h=254",
+    "Jordan Love": "https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/4036378.png&w=350&h=254",
+    "Breece Hall": "https://static.www.nfl.com/image/private/t_player_profile_landscape/f_auto/league/a6gggxrcgcacgggh0vme",
+    "Deebo Samuel": "https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/3126486.png&w=350&h=254",
+    //p2
+    "A.J. Brown": "",
+    "George Kittle": "",
+    "Nico Collins": "",
+    "Rachaad White": "",
+    "Brandon Aiyuk": "",
+    "Travis Kelce": "",
+    "Keenan Allen": "",
+    "T.J. Hockenson": "",
+    "Stefon Diggs": "",
+    "David Njoku": "",
+    "Brock Purdy": "",
+    "David Montgomery": "",
+    "Ja'Marr Chase": "",
+    "Davante Adams": "",
+    "Jahmyr Gibbs": "",
+    "Evan Engram": "",
+    "James Cook": "",
+    "Bijan Robinson": "",
+    "D.K. Metcalf": "",
+    "Jared Goff": "",
+    //p3
+
+  };
+
+export default playerPhotoUrls;
