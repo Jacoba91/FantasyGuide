@@ -26,7 +26,7 @@ df = pd.read_csv(csv_file_path)
 # Connect to the MySQL database
 # Create a connection to the MySQL database using SQLAlchemy
 # Replace 'username', 'password', 'hostname', 'port', and 'database' with your details
-database_url = "mysql+mysqlconnector://root:Nice2dream*@127.0.0.1:3306/playerdb"
+database_url = "mysql+mysqlconnector://root:________@127.0.0.1:3306/playerdb"
 engine = create_engine(database_url)
 
 # Use the DataFrame's `to_sql` method to create a new table in the database

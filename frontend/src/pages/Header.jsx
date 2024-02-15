@@ -6,9 +6,10 @@ const Header = () => {
         <div className="header-container">
             <div className="nav-left">
                 <a href="/home">Home</a>
-                <a href="/teams">Teams</a>
-                <a href="/positions">Positions</a>
+                <a href="/compare">Compare</a>
                 <a href="/team-builder">Team Builder</a>
+                <a href="/trade-analysis">Trade Analysis</a>
+                <a href="/news">News</a>
             </div>
             <div className="nav-right">
                 <a href="/" className="site-title">Fantasy Guide</a>

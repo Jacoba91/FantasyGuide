@@ -1,35 +1,97 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { TeamContext } from '../TeamContext';
-import playerPhotoUrls from "/Users/jaragao/Desktop/FantasyGuide/frontend/src/components/playerPhotos.js";
+import { ComparisonContext } from '../ComparisonContext';
+import playerPhotoUrls from '../components/playerPhotos';
 
 
 import './MainContent.css';
 
-const columnOrder = ['Rank', 'Player', 'Tm', 'FantPos', 'Age', 'G', 'GS', 'Cmp', 'Att', 'Yds', 'TD', 'Int', 'Att', 'Yds', 'Y/A', 'TD', 'Tgt', 'Rec', 'Yds', 'Y/R', 'TD', 'Fmb', 'FL', 'TD', '2PM', '2PP', 'FantPt', 'PPR', 'DKPt', 'FDPt', 'VBD', 'PosRank', 'OvRank'];
+const columnOrder = ['Rank', 'Player', 'Tm', 'FantPos', 'Age', 'G', 'GS', 'Cmp', 'PAtt', 'PYds', 'PTDs', 'Int', 'RAtt', 'RYds', 'Y/A', 'RTDs', 'Tgt', 'Rec', 'RecYds', 'Y/R', 'RecTDs', 'Fmb', 'FL', 'TotTDs', '2PM', '2PP', 'FantPt', 'PPR', 'DKPt', 'FDPt', 'VBD', 'PosRank', 'OvRank'];
 
 const MainContent = () => {
-    const [players, setPlayers] = useState(null); // state for player data
-    const [visibleChunks, setVisibleChunks] = useState(1); // state to track the number of visible chunks
-    const [searchQuery, setSearchQuery] = useState(''); // state for the search query
-    const [selectedPosition, setSelectedPosition] = useState('All'); // New state for selected position
-    const [selectedTeam, setSelectedTeam] = useState('All') // state for selected team
-    const [lockedPosition, setLockedPosition] = useState(null); // State for URL-based position
-    const [isTeamBuilding, setIsTeamBuilding] = useState(false); // State for team build
-
-    const [positionFromURL, setPositionFromURL] = useState(null);
-    const [indexFromURL, setIndexFromURL] = useState(null);
-
     // Use useLocation to access query parameters
     const location = useLocation();
     const navigate = useNavigate();
+
+    const [players, setPlayers] = useState(null); // state for player data
+    const [visibleChunks, setVisibleChunks] = useState(1); // state to track the number of visible chunks
+    const [searchQuery, setSearchQuery] = useState(''); // state for the search query
+    const [selectedPosition, setSelectedPosition] = useState('All'); // state for selected position
+    const [selectedTeam, setSelectedTeam] = useState('All') // state for selected team
+    const [lockedPosition, setLockedPosition] = useState(null); // state for URL-based position
+    const [isTeamBuilding, setIsTeamBuilding] = useState(false); // state for team build
+    const [indexFromURL, setIndexFromURL] = useState(null);
+    
+    const searchParams = new URLSearchParams(location.search);
+    const slotForComparison = searchParams.get('slot');
+
+
+    const cleanPlayerName = (name) => {
+        // This regex rids of +,* which appear due to original data format
+        const regex = /[^a-zA-Z .'-]/g;
+    
+        // Replace these characters with an empty string
+        return name.replace(regex, '');
+    };
     
     // Team context
     const { dispatch } = useContext(TeamContext);
 
+    // Compare context
+    const { updatePlayerInComparison } = useContext(ComparisonContext);
+
+    // Handle add player to trade interface
+    const handleSelectForTrade = (player) => {
+
+    }
+
+    // Function to handle the selection of a player for comparison
+    const selectPlayerForComparison = (player) => {
+        const cleanedName = cleanPlayerName(player.Player);
+        const playerForComparison = {
+            name: cleanedName,
+            photoUrl: playerPhotoUrls[cleanedName] || 'default-placeholder-url',
+            team: player.Tm,
+            position: player.FantPos,
+            age: player.Age,
+            games: player.G,
+            gamesStarted: player.GS,
+            completions: player.Cmp,
+            attempts: player.PAtt,
+            passingYards: player.PYds,
+            passingTDs: player.PTDs,
+            interceptions: player.Int,
+            rushingAttempts: player.RAtt,
+            rushingYards: player.RYds,
+            yardsPerAttempt: player['Y/A'],
+            rushingTDs: player.RTDs,
+            targets: player.Tgt,
+            receptions: player.Rec,
+            receivingYards: player.RecYds,
+            yardsPerReception: player['Y/R'],
+            receivingTDs: player.RecTDs,
+            fumbles: player.Fmb,
+            fumblesLost: player.FL,
+            totalTDs: player.TotTDs,
+            twoPointConversionsMade: player['2PM'],
+            twoPointConversionsPass: player['2PP'],
+            fantasyPoints: player.FantPt,
+            PPRPoints: player.PPR,
+            DKPoints: player.DKPt,
+            FDPoints: player.FDPt,
+            VBD: player.VBD,
+            positionRank: player.PosRank,
+            overallRank: player.OvRank
+        };
+        
+        const slotIndex = slotForComparison === 'playerOne' ? 0 : 1; // Convert slot to index
+        updatePlayerInComparison(slotIndex, playerForComparison); // Use the updated function
+        navigate('/compare');
+    };
+
     useEffect(() => {
         // Function to parse query parameters
-        const searchParams = new URLSearchParams(location.search);
         const positionFromURL = searchParams.get('position');
         let indexFromURL = searchParams.get('index'); // This will be a string or null
     
@@ -118,17 +180,10 @@ const MainContent = () => {
             targetPosition = 'Flex';
         } 
         
+        // Bench slots have an index but no position lock
         else if (index !== null && lockedPosition === null) {
             targetPosition = 'Bench';
         }
-
-        const cleanPlayerName = (name) => {
-            // This regex rids of +,*
-            const regex = /[^a-zA-Z .'-]/g;
-        
-            // Replace these characters with an empty string
-            return name.replace(regex, '');
-        };
 
         const photoUrl = playerPhotoUrls[cleanPlayerName(player.Player)] || 'https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg';
     
@@ -165,6 +220,9 @@ const MainContent = () => {
                 {columnOrder.map((column, index) => (
                     <th key={index}>{column}</th>
                 ))}
+                {isTeamBuilding && <th>Add Player</th>} {/* Conditionally render add player header */}
+                {(slotForComparison === 'playerOne' || slotForComparison === 'playerTwo') && <th>Compare</th>} {/* Conditional header for Compare */}
+                {(slotForComparison === 'Receiving' || slotForComparison === 'Giving') && <th>Trade</th>} {/* Conditional header for Trades*/}
             </tr>
         </thead>
     );
@@ -174,61 +232,75 @@ const MainContent = () => {
         const chunks = getChunks(filteredPlayers, 20);
         return (
             <div className='table-container'>
-                <h1>2023 Fantasy Results</h1>
-                <input 
-                    type="text" 
-                    placeholder="Search by player name..." 
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                />
-                <select 
-                    value={lockedPosition || selectedPosition} 
-                    onChange={(e) => setSelectedPosition(e.target.value)}
-                    disabled={!!lockedPosition} // Disable if lockedPosition is set
-                >
-                    <option value="All">All Positions</option>
-                    <option value="QB">QB</option>
-                    <option value="RB">RB</option>
-                    <option value="FB">FB</option>
-                    <option value="TE">TE</option>
-                    <option value="WR">WR</option>
-                    <option value='{"flexPositions":["WR","TE","RB","FB"]}'>Flex</option>
-                </select>
-                <select value={selectedTeam} onChange={(e) => setSelectedTeam(e.target.value)}>
-                    <option value="All">All Teams</option>
-                    <option value="ARI">ARI</option>
-                    <option value="ATL">ATL</option>
-                    <option value="BAL">BAL</option>
-                    <option value="BUF">BUF</option>
-                    <option value="CAR">CAR</option>
-                    <option value="CHI">CHI</option>
-                    <option value="CIN">CIN</option>
-                    <option value="CLE">CLE</option>
-                    <option value="DAL">DAL</option>
-                    <option value="DEN">DEN</option>
-                    <option value="DET">DET</option>
-                    <option value="GNB">GNB</option>
-                    <option value="HOU">HOU</option>
-                    <option value="IND">IND</option>
-                    <option value="JAX">JAX</option>
-                    <option value="KAN">KAN</option>
-                    <option value="LAC">LAC</option>
-                    <option value="LAR">LAR</option>
-                    <option value="LVR">LVR</option>
-                    <option value="MIA">MIA</option>
-                    <option value="MIN">MIN</option>
-                    <option value="NOR">NOR</option>
-                    <option value="NWE">NWE</option>
-                    <option value="NYG">NYG</option>
-                    <option value="NYJ">NYJ</option>
-                    <option value="PHI">PHI</option>
-                    <option value="PIT">PIT</option>
-                    <option value="SEA">SEA</option>
-                    <option value="SFO">SFO</option>
-                    <option value="TAM">TAM</option>
-                    <option value="TEN">TEN</option>
-                    <option value="WAS">WAS</option>
-                </select>
+                <h1 className='home-header'>2023 Fantasy Results</h1>
+                <div className='form-container'>
+                    <div className='form'>
+                        <input 
+                            type="text" 
+                            className='input'
+                            placeholder="Search by player name..."
+                            required=""
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                        />
+                        <span class="input-border"></span>
+                    </div>
+
+                    <select 
+                        className='select-dropdown' 
+                        value={lockedPosition || selectedPosition} 
+                        onChange={(e) => setSelectedPosition(e.target.value)}
+                        disabled={!!lockedPosition}
+                    >
+                        <option value="All">All Positions</option>
+                        <option value="QB">QB</option>
+                        <option value="RB">RB</option>
+                        <option value="FB">FB</option>
+                        <option value="TE">TE</option>
+                        <option value="WR">WR</option>
+                        <option value='{"flexPositions":["WR","TE","RB","FB"]}'>Flex</option>
+                    </select>
+
+                    <select 
+                        className='select-dropdown' 
+                        value={selectedTeam} 
+                        onChange={(e) => setSelectedTeam(e.target.value)}
+                    >
+                        <option value="All">All Teams</option>
+                        <option value="ARI">ARI</option>
+                        <option value="ATL">ATL</option>
+                        <option value="BAL">BAL</option>
+                        <option value="BUF">BUF</option>
+                        <option value="CAR">CAR</option>
+                        <option value="CHI">CHI</option>
+                        <option value="CIN">CIN</option>
+                        <option value="CLE">CLE</option>
+                        <option value="DAL">DAL</option>
+                        <option value="DEN">DEN</option>
+                        <option value="DET">DET</option>
+                        <option value="GNB">GNB</option>
+                        <option value="HOU">HOU</option>
+                        <option value="IND">IND</option>
+                        <option value="JAX">JAX</option>
+                        <option value="KAN">KAN</option>
+                        <option value="LAC">LAC</option>
+                        <option value="LAR">LAR</option>
+                        <option value="LVR">LVR</option>
+                        <option value="MIA">MIA</option>
+                        <option value="MIN">MIN</option>
+                        <option value="NOR">NOR</option>
+                        <option value="NWE">NWE</option>
+                        <option value="NYG">NYG</option>
+                        <option value="NYJ">NYJ</option>
+                        <option value="PHI">PHI</option>
+                        <option value="PIT">PIT</option>
+                        <option value="SEA">SEA</option>
+                        <option value="SFO">SFO</option>
+                        <option value="TAM">TAM</option>
+                        <option value="TEN">TEN</option>
+                        <option value="WAS">WAS</option>
+                    </select>
+                </div>
                 
                 {chunks.slice(0, visibleChunks).map((chunk, chunkIndex) => (
                     <table key={chunkIndex}>
@@ -241,18 +313,25 @@ const MainContent = () => {
                                     ))}
                                     {isTeamBuilding && (
                                         <td>
-                                            <button onClick={() => handleAddPlayer(player)}>
+                                            <button className='add-player' onClick={() => handleAddPlayer(player)}>
                                                 Add Player
                                             </button>
                                         </td>
                                     )}
+                                    {(slotForComparison === 'playerOne' || slotForComparison === 'playerTwo') && (
+                                        <td>
+                                            <button className='add-player' onClick={() => selectPlayerForComparison(player)}>
+                                                Compare
+                                            </button>
+                                        </td>
+                                    )}
                                 </tr>
-                            ))}
+                            ))}      
                         </tbody>
                     </table>
                 ))}
                 {visibleChunks * 15 < players.length && (
-                    <button onClick={loadMoreChunks}>Load More</button>
+                    <button className='load-more' onClick={loadMoreChunks}>Load More</button>
                 )}
             </div>
         );

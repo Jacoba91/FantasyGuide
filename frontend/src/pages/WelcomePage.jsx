@@ -2,8 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import './WelcomePage.css';
 
-import TestConnection from '../TestConnection';
-
 const WelcomePage = () => {
     const navigate = useNavigate();
 
@@ -14,7 +12,7 @@ const WelcomePage = () => {
     return (
         <div className="welcome-container">
             <div className="content">
-                <h1>Welcome to Fantasy Guide</h1>
+                <h1>FantasyGuide</h1>
                 <p>Your ultimate companion in Fantasy Football.</p>
                 <button class="cssbuttons-io-button" onClick={handleEnter} >
                     Get started

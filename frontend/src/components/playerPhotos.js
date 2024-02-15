@@ -42,7 +42,26 @@ const playerPhotoUrls = {
     "D.K. Metcalf": "https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/4047650.png&w=350&h=254",
     "Jared Goff": "https://a.espncdn.com/i/headshots/nfl/players/full/3046779.png",
     //p3
-
+    "Taysom Hill": "https://static.www.nfl.com/image/private/t_headshot_desktop/league/pjp1aahvacigoh0sorpg",
+    "Amari Cooper": "https://static.www.nfl.com/image/private/t_player_profile_landscape/f_auto/league/zibbxjtein7gpu5zgcj4",
+    "Saquon Barkley": "https://static.www.nfl.com/image/private/t_headshot_desktop/league/o8tlhps5u1tvnaaxlpjk",
+    "Calvin Ridley": "https://static.www.nfl.com/image/private/t_headshot_desktop/league/jnknuowszoqaywqoopy7",
+    "Jayden Reed": "https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/4362249.png&w=350&h=254",
+    "Cole Kmet": "https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/4258595.png",
+    "Jordan Addison": "https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/4429205.png&w=350&h=254",
+    "Jake Ferguson": "https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/4242355.png&w=350&h=254",
+    "DeAndre Hopkins": "https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/15795.png",
+    "Patrick Mahomes": "https://static.www.nfl.com/image/private/t_headshot_desktop/league/oagzjdsdoezmp6frggrn",
+    "Jakobi Meyers": "https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/3916433.png",
+    "James Conner": "https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/3045147.png&w=350&h=254",
+    "Gus Edwards": "https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/3051926.png&w=350&h=254",
+    "DeVonta Smith": "https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/4241478.png",
+    "George Pickens": "https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/4426354.png&w=350&h=254",
+    "Trey McBride": "https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/4361307.png&w=350&h=254",
+    "Chris Olave": "https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/4361370.png&w=350&h=254",
+    "C.J. Stroud": "https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/4432577.png&w=350&h=254",
+    "Kenneth Walker III": "https://static.www.nfl.com/image/private/t_headshot_desktop/league/rwdj1bljth8fyojof5dp",
+    "Baker Mayfield": "https://static.www.nfl.com/image/private/t_headshot_desktop/league/haglbmidyaxtimhctzlp",
   };
 
 export default playerPhotoUrls;

@@ -13,6 +13,10 @@ const initialRosterState = {
     }
 };
 
+const initialTradeState = {
+    trades: Array(3).fill({ name: null, position: null, team: null, photo: null }),
+}
+
 const teamReducer = (state, action) => {
     switch (action.type) {
         case 'ADD_PLAYER':
@@ -29,6 +33,11 @@ const teamReducer = (state, action) => {
             } else {
                 return { ...state, team: { ...state.team, [targetPosition]: player } };
             }
+
+        case 'TRADE_PLAYER':
+            const { playerForTrade, slot } = action.payload;
+            
+            
         // ... other actions ...
         default:
             return state;

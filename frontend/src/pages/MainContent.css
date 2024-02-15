@@ -1,56 +1,136 @@
 .main-content-container {
     padding: 20px;
-    background-color: #f4f4f4;
-    color: #005f73;
-    
+    background-color: #f9fafb; /* Lighter shade for background */
+    color: #334155; /* Darker shade for text for better readability */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern, readable font */
+    word-wrap: break-word;
 }
 
 .table-container {
-    margin-top: 20px;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 80%;
-    border: 1px solid #005f73;
+    max-width: 100%;
+    min-height: 1080px;
+    margin: 0 auto;
     padding: 20px;
-    overflow-x: auto;
-    border-radius: 15px; /* Rounded corners for table container */
+    background-color: #a4c1c3;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Add shadow for depth */
+    overflow-x: auto; /* Improved overflow handling */
+}
+
+.home-header {
+    background-color: #07741E; /* Consistent header color */
+    color: #ffffff;
+    display: inline-block;
+    padding: 10px 20px; /* Increased padding for better visibility */
+    border-radius: 5px;
+    border: none; /* Remove border for a cleaner look */
+    font-weight: bold;
 }
 
 table {
     width: 100%;
-    max-width: 600px;
-    border-collapse: separate; /* Adjust for border-radius */
+    margin: 0;
     border-spacing: 0;
-    margin-bottom: 20px;
-    margin-left: auto;
-    margin-right: auto;
+    border-collapse: collapse;
+    font-weight: normal; /* Regular font weight for better readability */
+    background: #fff;
 }
 
 th, td {
-    border: 1px solid #005f73;
-    padding: 8px;
-    text-align: left;
+    padding: 8px; /* Increased padding for readability */
+    font-size: 0.6em; /* Adjusted font size */
+    border-bottom: 1px solid #e2e8f0; /* Lighter border color */
 }
 
-
 thead {
-    background-color: #007bff;
+    background-color: #07741E;
     color: #fff;
-    border-radius: 0px;
 }
 
 tr:nth-child(even) {
-    background-color: #e0f2fe;
+    background-color: #f1f5f9; /* Lighter shade for even rows */
 }
 
 tr:hover {
-    background-color: #bee3f8;
+    background-color: #eff6ff; /* Subtle hover effect */
+}
+
+thead tr:hover {
+    background-color: inherit; /* Keeps the color same as non-hover state */
 }
 
 @media screen and (max-width: 600px) {
-    .table-container {
-        width: 100%;
-        margin-left: 10px;
-        margin-right: 10px;
+    th, td {
+        font-size: 0.9em; /* Adjust font size for mobile */
+        padding: 8px; /* Adjust padding for mobile */
     }
+}
+
+.form-container {
+    display: flex; /* Aligns children in a row */
+    gap: 10px; /* Spacing between children */
+    margin-bottom: 20px; /* Margin below the form container */
+}
+
+.form {
+    --width-of-input: 200px;
+    --border-height: 1px;
+    --border-before-color: rgba(221, 221, 221, 0.39);
+    --border-after-color: #5891ff;
+    --input-hovered-color: #4985e01f;
+    background-color: white;
+    position: relative;
+    width: var(--width-of-input);
+   }
+   /* styling of Input */
+   .input {
+    color: black;
+    font-size: 0.9rem;
+    background-color: transparent;
+    width: 100%;
+    box-sizing: border-box;
+    padding-inline: 0.5em;
+    padding-block: 0.7em;
+    border: none;
+    border-bottom: var(--border-height) solid var(--border-before-color);
+   }
+   /* styling of animated border */
+   .input-border {
+    position: absolute;
+    background: var(--border-after-color);
+    width: 0%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    transition: 0.3s;
+   }
+   /* Hover on Input */
+   input:hover {
+    background: var(--input-hovered-color);
+   }
+   
+   input:focus {
+    outline: none;
+   }
+   /* here is code of animated border */
+   input:focus ~ .input-border {
+    width: 100%;
+   }
+
+
+.load-more, .add-player {
+    background-color: #007bff; /* Matching the select dropdown background */
+    color: white; /* Text color */
+    border: none; /* No border for a modern look */
+    border-radius: 5px; /* Matching the border-radius of the select dropdown */
+    padding: 5px 10px; /* Appropriate padding for button size */
+    font-size: 1em; /* Matching the font size of the select dropdown */
+    cursor: pointer; /* Cursor changes to pointer to indicate button functionality */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    text-align: center; /* Centering text */
+    display: inline-block; /* Allows setting padding and margins */
+    margin: 5px 0; /* Margin to separate it from other elements */
+}
+
+.load-more:hover, .add-player:hover {
+    background-color: #0056b3; /* Darker shade for hover effect */
 }

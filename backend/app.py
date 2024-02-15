@@ -1,22 +1,27 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
+import os
 
 import pymysql
 from pymysql import Error
 import pymysql.cursors
 
+from insight_api import get_openai_response
+
+sql_passcode = os.getenv('SQL_PASSWORD')
 
 app = Flask(__name__)
 CORS(app)
 
 def get_data():
+
     try:
         # Database connection
         connection = pymysql.connect(
-        host='127.0.0.1',        # or your host
+        host='127.0.0.1',
         database='playerdb',
-        user='root',    # your MySQL username
-        password='Great2see!', # your MySQL password
+        user='root',
+        password=sql_passcode,
         cursorclass=pymysql.cursors.DictCursor
         )
 
@@ -37,12 +42,28 @@ def get_data():
             print("MySQL connection is closed")
 
 
+
+
 @app.route('/players', methods=['GET'])
 def players():
     data = get_data()  # Fetch the data, which should be a list of dictionaries
     return jsonify(data)  # Convert the data to JSON and return the response
 
 
+@app.route('/api/update-roster', methods=['POST'])
+def update_roster():
+    data = request.json
+    player_names = data.get('playerNames')
+
+    # Validate player_names
+    if not player_names:
+        return jsonify({"status": "error", "message": "No player names provided"}), 400
+
+    # Call the function from insight_api.py
+    openai_response = get_openai_response(player_names)
+
+    # Process the player names as needed
+    return jsonify({"status": "success", "feedback": openai_response})
 
 # Test connection to frontend
 @app.route('/test')

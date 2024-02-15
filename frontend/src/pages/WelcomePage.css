@@ -7,6 +7,7 @@
     height: 100vh;
     background: url('https://media-api.xogrp.com/images/0dcb2a37-6d25-4a80-a541-853e6e44b54b~cr_0.90.1991.1424') no-repeat center center fixed; 
     background-size: cover;
+    
 }
 
 .content {
@@ -14,6 +15,7 @@
     border-radius: 10px;
     padding: 20px;
     max-width: 500px; /* Limit width for better readability */
+    min-width: 500px;
     display: flex;            /* Enables Flexbox */
     flex-direction: column;   /* Aligns children vertically */
     justify-content: center;  /* Centers children vertically */

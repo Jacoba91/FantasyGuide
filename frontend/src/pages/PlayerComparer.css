@@ -1,0 +1,119 @@
+.main-content-container {
+    padding: 20px;
+    background: url('https://images.alphacoders.com/134/1347615.png') no-repeat center center fixed; 
+    background-size: cover;
+    background-color: #a4c1c3;
+    color: #334155;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 1080px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    overflow-x: auto;
+    max-width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.compare-title {
+    align-self: flex-start; /* Align title to the top left */
+    background-color: #07741E;
+    color: #ffffff;
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    font-weight: bold;
+    margin-top: 10px; /* Adjust space from top */
+    margin-left: 20px; /* Adjust space from left */
+}
+
+.comparison-row {
+    width: 100%; /* Take full width of the container */
+    display: flex;
+    justify-content: center; /* Center children horizontally */
+    gap: 20px;
+}
+
+.player-comp-box1 {
+    flex-grow: 1;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    gap: 10px;
+    min-width: 500px;
+}
+.player-comp-box2 {
+    flex-grow: 1;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    gap: 10px;
+    min-width: 500px;
+}
+
+.player-comp-photo {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+}
+
+.statbar-container {
+    margin-top: 20px; /* Spacing above the stats */
+    width: 100%; /* Full width of the container */
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack items vertically */
+    align-items: flex-start; /* Align items to the start */
+    gap: 10px; /* Space between each stat bar row */
+}
+
+.statbar-row {
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Align items vertically */
+    width: 100%; /* Full width for each row */
+}
+
+.statbar-row label {
+    flex: 0 0 150px; /* Fixed width for labels */
+    text-align: left; /* Align text to the right */
+    margin-right: 10px; /* Space between label and bar */
+    font-weight: bold; /* Make label text bold */
+}
+
+.statbar {
+    flex-grow: 1; /* Allow stat bar to take up remaining space */
+    height: 20px; /* Fixed height for the stat bar */
+    background-color: #e0e0e0; /* Lighter color for the unfilled part */
+    border-radius: 5px; /* Rounded corners for the stat bar */
+    position: relative; /* Set position context for pseudo-element */
+    overflow: hidden; /* Hide overflow to maintain rounded corners */
+    border-color: #334155;
+    border: 2px solid black;
+    box-sizing: border-box;
+}
+
+.statbar::after {
+    content: '';
+    display: block;
+    height: 100%;
+    background-color: #4caf50; /* Darker color for the filled part */
+    width: var(--bar-width);
+    position: absolute; /* Position absolutely within .statbar */
+    top: 0;
+    left: 0;
+    transition: width 0.5s ease-out; /* Smooth transition for the bar width */
+}
