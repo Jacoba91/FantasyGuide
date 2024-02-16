@@ -1,3 +1,5 @@
+# This code was used to initialize the database in mysql from a csv.
+
 import pandas as pd
 
 from sqlalchemy import create_engine, Column, Integer, String, Float

@@ -6,8 +6,8 @@ const PlayerStatBar = (props) => {
     useEffect(() => {
         let newWidth;
         if (props.max === 1) {
-            // Invert the calculation for rank-type stats
-            const maxRank = 70; // Set a sensible maximum rank
+            // Invert the calculation for rank-type stats (lower number = higher rank)
+            const maxRank = 70; // Set maximum rank
             newWidth = Math.round((1 - (props.value - 1) / (maxRank - 1)) * 100) + "%";
         } else {
             // Regular calculation for other stats

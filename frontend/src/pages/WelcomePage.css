@@ -1,5 +1,3 @@
-/* CSS for the WelcomePage, using modern and clean design principles and ensuring responsiveness */
-
 .welcome-container {
     display: flex;
     justify-content: center;
@@ -14,9 +12,9 @@
     background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
     border-radius: 10px;
     padding: 20px;
-    max-width: 500px; /* Limit width for better readability */
+    max-width: 500px;
     min-width: 500px;
-    display: flex;            /* Enables Flexbox */
+    display: flex;
     flex-direction: column;   /* Aligns children vertically */
     justify-content: center;  /* Centers children vertically */
     align-items: center;      /* Centers children horizontally */
@@ -96,6 +94,6 @@
     }
 
     .content p {
-        font-size: 1em; /* Smaller font size for smaller screens */
+        font-size: 1em;
     }
 }

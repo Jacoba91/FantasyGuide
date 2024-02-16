@@ -6,7 +6,7 @@ import {BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { TeamProvider } from './TeamContext';
 import { ComparisonProvider } from './ComparisonContext';
 import WelcomePage from './pages/WelcomePage';
-import Header from './pages/Header';
+import Header from './components/Header';
 import MainContent from './pages/MainContent';
 import TeamBuilder from './pages/TeamBuilder';
 import PlayerComparer from './pages/PlayerComparer';
@@ -16,7 +16,7 @@ import TradeAnalysis from './pages/TradeAnalysis';
 function App() {
     return (
         <div>
-            <TeamProvider> {/* Wrap Routes with TeamProvider */}
+            <TeamProvider> {/* Wrap Routes with TeamProvider and ComparisonProvider */}
                 <ComparisonProvider>
                     <Router>
                         <Header></Header>

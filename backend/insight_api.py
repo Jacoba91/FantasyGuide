@@ -1,3 +1,5 @@
+# Using openAI language model API to gather some roster feeback.
+
 import os
 from openai import OpenAI
 

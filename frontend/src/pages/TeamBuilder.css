@@ -1,10 +1,10 @@
 .team-builder-wrap {
     background: url('../components/photos/Background1.webp') no-repeat center center fixed; 
     background-size: cover;
-    display: flex; /* Use Flexbox for layout */
-    justify-content: space-between; /* Space out the children */
+    display: flex;
+    justify-content: space-between;
     align-items: flex-start; /* Align items to the top */
-    padding: 20px; /* Add some padding around */
+    padding: 20px;
 }
 
 .team-sheet {
@@ -14,19 +14,18 @@
     justify-content: center;
     padding: 20px;
     background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
-    border: 3px solid #333333; /* Darker border for contrast */
-    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5); /* Enhanced shadow for depth */
-    border-radius: 15px; /* Rounded corners */
-    max-width: 600px;
+    border: 3px solid #333333;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
     margin: auto;
     margin: 45px 45px;
     flex: 1; /* Take up remaining space */
 }
 
 .roster-title {
-    color: #333333; /* Dark text for better readability */
-    font-weight: bold; /* Bold font for the title */
-    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+    color: #333333; 
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 0.8);
     border: 2px solid #333333;
     text-decoration: none;
     border-radius: 15px;
@@ -41,8 +40,8 @@
 .roster-slot {
     display: flex;
     align-items: center;
-    background-color: #ffffff; /* Pure white for a clean look */
-    border-bottom: 1px solid #ddd; /* Subtle border */
+    background-color: #ffffff;
+    border-bottom: 1px solid #ddd;
     padding: 10px 20px;
     transition: background-color 0.3s; /* Smooth transition for hover effect */
 }
@@ -52,22 +51,22 @@
 }
 
 .profile-photo {
-    height: 60px; /* Adjust size as needed */
+    height: 60px;
     width: 60px;
-    border-radius: 50%; /* Circular profile photo */
-    margin-right: 15px; /* Space between photo and player info */
-    object-fit: cover; /* Maintain the aspect ratio */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15); /* More subtle shadow */
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover; /* Maintain the src photo aspect ratio */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
 }
 
 .team-report-sheet {
-    flex: 0 0 50%; /* Take up 50% of the container's width */
-    height: 50%; /* Half the vertical length of its container */
+    flex: 0 0 50%; 
+    height: 50%; 
     background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
-    padding: 20px; /* Padding inside the report */
-    border: 2px solid #333; /* Border for the report */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+    padding: 20px; 
+    border: 2px solid #333; 
+    border-radius: 10px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
     display: flex;
     flex-direction: column;
     justify-content: center; /* Vertically centers content */
@@ -83,9 +82,9 @@
   background-size: 55px 55px;
   width: 100% - 40px; /* Adjust as needed */
   min-height: 200px;
-  text-align: left; /* Align text to the left */
-  padding: 15px; /* Add some padding inside the box */
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1); /* Optional: adds slight shadow for depth */
+  text-align: left;
+  padding: 15px; 
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
 }
 
 .report-text {

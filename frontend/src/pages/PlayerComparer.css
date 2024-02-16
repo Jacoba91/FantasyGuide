@@ -25,14 +25,14 @@
     border-radius: 5px;
     border: none;
     font-weight: bold;
-    margin-top: 10px; /* Adjust space from top */
-    margin-left: 20px; /* Adjust space from left */
+    margin-top: 10px; 
+    margin-left: 20px; 
 }
 
 .comparison-row {
-    width: 100%; /* Take full width of the container */
+    width: 100%; 
     display: flex;
-    justify-content: center; /* Center children horizontally */
+    justify-content: center; 
     gap: 20px;
 }
 
@@ -73,34 +73,34 @@
 }
 
 .statbar-container {
-    margin-top: 20px; /* Spacing above the stats */
-    width: 100%; /* Full width of the container */
-    display: flex; /* Use flexbox for layout */
+    margin-top: 20px; 
+    width: 100%; 
+    display: flex; 
     flex-direction: column; /* Stack items vertically */
-    align-items: flex-start; /* Align items to the start */
+    align-items: flex-start;
     gap: 10px; /* Space between each stat bar row */
 }
 
 .statbar-row {
-    display: flex; /* Use flexbox for layout */
-    align-items: center; /* Align items vertically */
-    width: 100%; /* Full width for each row */
+    display: flex; 
+    align-items: center; 
+    width: 100%; 
 }
 
 .statbar-row label {
     flex: 0 0 150px; /* Fixed width for labels */
-    text-align: left; /* Align text to the right */
-    margin-right: 10px; /* Space between label and bar */
-    font-weight: bold; /* Make label text bold */
+    text-align: left; 
+    margin-right: 10px; 
+    font-weight: bold;
 }
 
 .statbar {
-    flex-grow: 1; /* Allow stat bar to take up remaining space */
-    height: 20px; /* Fixed height for the stat bar */
-    background-color: #e0e0e0; /* Lighter color for the unfilled part */
-    border-radius: 5px; /* Rounded corners for the stat bar */
-    position: relative; /* Set position context for pseudo-element */
-    overflow: hidden; /* Hide overflow to maintain rounded corners */
+    flex-grow: 1; 
+    height: 20px; 
+    background-color: #e0e0e0; /* Unfilled bar area */
+    border-radius: 5px; 
+    position: relative; 
+    overflow: hidden;
     border-color: #334155;
     border: 2px solid black;
     box-sizing: border-box;
@@ -110,10 +110,10 @@
     content: '';
     display: block;
     height: 100%;
-    background-color: #4caf50; /* Darker color for the filled part */
+    background-color: #4caf50; /* Filled bar color */
     width: var(--bar-width);
-    position: absolute; /* Position absolutely within .statbar */
+    position: absolute;
     top: 0;
     left: 0;
-    transition: width 0.5s ease-out; /* Smooth transition for the bar width */
+    transition: width 0.5s ease-out; /* Transition for bar width */
 }

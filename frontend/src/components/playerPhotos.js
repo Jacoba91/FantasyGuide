@@ -1,3 +1,5 @@
+{/* Current work-around for lack of free nfl player headshots API. */}
+
 const playerPhotoUrls = {
     //p1
     "Christian McCaffrey": "https://a.espncdn.com/i/headshots/nfl/players/full/3117251.png",

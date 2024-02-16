@@ -1,12 +1,12 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 import './WelcomePage.css';
 
 const WelcomePage = () => {
     const navigate = useNavigate();
 
     const handleEnter = () => {
-        navigate('/home'); // Navigate to the home page
+        navigate('/home');
     };
 
     return (

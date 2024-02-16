@@ -3,7 +3,6 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import requests
 import csv
-#import time
 
 all_players = []
 

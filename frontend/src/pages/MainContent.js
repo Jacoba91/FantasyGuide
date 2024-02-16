@@ -1,3 +1,5 @@
+// All data retrieved from www.pro-football-reference.com
+
 import React, { useState, useEffect, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { TeamContext } from '../TeamContext';
@@ -86,7 +88,7 @@ const MainContent = () => {
         };
         
         const slotIndex = slotForComparison === 'playerOne' ? 0 : 1; // Convert slot to index
-        updatePlayerInComparison(slotIndex, playerForComparison); // Use the updated function
+        updatePlayerInComparison(slotIndex, playerForComparison);
         navigate('/compare');
     };
 

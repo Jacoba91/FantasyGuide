@@ -13,6 +13,7 @@ sql_passcode = os.getenv('SQL_PASSWORD')
 app = Flask(__name__)
 CORS(app)
 
+# Gets data from sql database
 def get_data():
 
     try:
@@ -42,14 +43,13 @@ def get_data():
             print("MySQL connection is closed")
 
 
-
-
 @app.route('/players', methods=['GET'])
 def players():
     data = get_data()  # Fetch the data, which should be a list of dictionaries
     return jsonify(data)  # Convert the data to JSON and return the response
 
 
+# Get the names of players in current roster to pass into language model
 @app.route('/api/update-roster', methods=['POST'])
 def update_roster():
     data = request.json
@@ -62,7 +62,7 @@ def update_roster():
     # Call the function from insight_api.py
     openai_response = get_openai_response(player_names)
 
-    # Process the player names as needed
+    # Process the player names
     return jsonify({"status": "success", "feedback": openai_response})
 
 # Test connection to frontend

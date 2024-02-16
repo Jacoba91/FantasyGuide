@@ -55,7 +55,7 @@ const TeamBuilder = () => {
     const [isLoading, setIsLoading] = useState(false); // State to track loading
     const [isButtonVisible, setIsButtonVisible] = useState(true); // State for button visibility
 
-    // Get ai insights from backend
+    // Get GPT insights from backend
     const fetchInsights = async () => {
         try {
             const response = await fetch('/api/update-roster', {
@@ -145,7 +145,7 @@ const TeamBuilder = () => {
         sendRosterToBackend(playerNames);
     };
 
-    // Render single and multiple spot positions
+    // Render single and multiple spot positions in roster
     const renderRosterSlot = (position, player, index = null) => {
         const displayPosition = index !== null ? `${position} ${index + 1}` : position;
         const playerName = player && player.name ? player.name : 'Empty';
