@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 import os
+from dotenv import load_dotenv
 
 import pymysql
 from pymysql import Error
@@ -8,6 +9,7 @@ import pymysql.cursors
 
 from insight_api import get_openai_response
 
+load_dotenv()
 sql_passcode = os.getenv('SQL_PASSWORD')
 
 app = Flask(__name__)
