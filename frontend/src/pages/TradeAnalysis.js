@@ -1,29 +1,53 @@
-import React from 'react';
+// In TradeAnalysis.js
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router';
+import { TeamContext } from '../TeamContext'; // Adjust the path as necessary
 
-import './PlayerComparer.css'
+import './PlayerComparer.css';
 import './TradeAnalysis.css';
 
 const TradeAnalysis = () => {
     const navigate = useNavigate();
+    const { trade } = useContext(TeamContext); // Accessing trade state
 
-    const handleTradePlayers = (slot) => {
-        navigate(`/home?slot=${slot}`);
-    }
+    const handleSelectPlayers = (slotType, index) => {
+        navigate(`/home?tradeSlot=${slotType}&slotNumber=${index}`);
+    };
+
+    const renderTradeSlots = (slotType) => {
+        return (
+            <ul className="trade-list">
+                {trade[slotType].map((player, index) => {
+                    const playerName = player.name || 'Click to Add';
+                    const playerPhoto = player.photo || 'https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg';
+    
+                    return (
+                        <li key={index} className="trade-list-item" onClick={() => handleSelectPlayers(slotType, index)}>
+                            <img className="profile-photo" src={playerPhoto} alt={playerName} />
+                            <div className="player-info">
+                                {`${playerName}`}
+                            </div>
+                        </li>
+                    );
+                })}
+            </ul>
+        );
+    };
 
     return (
         <div className='main-content-container'>
             <h1 className='compare-title'>Trade Analysis</h1>
-            <div className='comparison-container'>
-                <div class="comparison-row">
-                    <div className='player-comp-box1' onClick={() => handleTradePlayers('Receiving')}>
-                        <p>Select Players To Receive</p>
-                    </div>
-                    <div className='player-comp-box2' onClick={() => handleTradePlayers('Giving')}>
-                        <p>Select Players To Give</p>
-                    </div>
+            <div className='trade-analysis-container'>
+                <div className="trade-column">
+                    <div className="trade-column-header">Players To Give</div>
+                    {renderTradeSlots('give')}
+                </div>
+                <div className="trade-column">
+                    <div className="trade-column-header">Players To Get</div>
+                    {renderTradeSlots('get')}
                 </div>
             </div>
+            <button className="add-player">Analyze</button>
         </div>
     );
 };

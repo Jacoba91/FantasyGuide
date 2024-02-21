@@ -1,0 +1,47 @@
+.trade-analysis-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .trade-column {
+    background-color: #fff;
+    border: 1px solid #ddd; 
+    border-radius: 4px;
+    width: 300px;
+    margin: 0 10px; /* Spacing between the two columns */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* subtle shadow */
+  }
+  
+  .trade-column-header {
+    background-color: #f76d6d; /* Red header background */
+    color: #fff; /* White text color */
+    padding: 10px;
+    text-align: center;
+    border-top-left-radius: 4px; /* Rounded corners for the header */
+    border-top-right-radius: 4px;
+    font-weight: bold;
+  }
+  
+  .trade-list {
+    list-style-type: none; /* Remove default list styling */
+    padding: 0;
+    margin: 0;
+  }
+  
+  .trade-list-item {
+    padding: 10px;
+    border-bottom: 1px solid #ddd; /* Light gray border for each item */
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Last child in the list should not have a bottom border */
+  .trade-list-item:last-child {
+    border-bottom: none;
+  }
+  
+  .player-info {
+    flex-grow: 1; /* Ensure the player info takes up the remaining space */
+    padding-left: 10px;
+  }

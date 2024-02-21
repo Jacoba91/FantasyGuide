@@ -23,6 +23,7 @@ const MainContent = () => {
     const [selectedTeam, setSelectedTeam] = useState('All') // state for selected team
     const [lockedPosition, setLockedPosition] = useState(null); // state for URL-based position
     const [isTeamBuilding, setIsTeamBuilding] = useState(false); // state for team build
+    const [isTrading, setIsTrading] = useState(false); // state for trading
     const [indexFromURL, setIndexFromURL] = useState(null);
     
     const searchParams = new URLSearchParams(location.search);
@@ -42,11 +43,6 @@ const MainContent = () => {
 
     // Compare context
     const { updatePlayerInComparison } = useContext(ComparisonContext);
-
-    // Handle add player to trade interface
-    const handleSelectForTrade = (player) => {
-
-    }
 
     // Function to handle the selection of a player for comparison
     const selectPlayerForComparison = (player) => {
@@ -93,9 +89,20 @@ const MainContent = () => {
     };
 
     useEffect(() => {
-        // Function to parse query parameters
+        // Function to parse query parameters while roster building
         const positionFromURL = searchParams.get('position');
+
+        // Index for player comparisons
         let indexFromURL = searchParams.get('index'); // This will be a string or null
+
+       // Extract 'slotNumber' and 'tradeSlot' from URL parameters
+        const slotNumberFromURL = parseInt(searchParams.get('slotNumber'));
+        const tradeSlot = searchParams.get('tradeSlot');
+        
+        if (tradeSlot && !isNaN(slotNumberFromURL)) {
+            // enable trading mode if trade slot is clicked, has an index
+            setIsTrading(true);
+        }
     
         // Resetting the lockedPosition and isTeamBuilding states
         setLockedPosition(null);
@@ -154,6 +161,24 @@ const MainContent = () => {
     
             return matchesName && matchesPosition && matchesTeam;
         });
+    };
+
+    // Handle add player to trade interface
+    const handleAddToTrade = (player) => {
+        let slotNumberFromURL = parseInt(searchParams.get('slotNumber'));
+        let tradeSlot = searchParams.get('tradeSlot');
+
+         // Logic to determine the correct index and dispatch the action
+         dispatch({
+            type: 'ADD_TO_TRADE',
+            payload: {
+                 slotType: tradeSlot,
+                 player: { name: cleanPlayerName(player.Player), photo: playerPhotoUrls[cleanPlayerName(player.Player)] },
+                 index: slotNumberFromURL
+            }
+        });
+
+        navigate('/trade-analysis');
     };
 
     // Function for adding player
@@ -324,6 +349,13 @@ const MainContent = () => {
                                         <td>
                                             <button className='add-player' onClick={() => selectPlayerForComparison(player)}>
                                                 Compare
+                                            </button>
+                                        </td>
+                                    )}
+                                    {isTrading && (
+                                        <td>
+                                            <button className='add-player' onClick={() => handleAddToTrade(player)}>
+                                                Trade Player
                                             </button>
                                         </td>
                                     )}
