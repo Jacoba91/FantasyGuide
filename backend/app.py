@@ -8,6 +8,7 @@ from pymysql import Error
 import pymysql.cursors
 
 from insight_api import get_openai_response
+from trade_insight import analyze_fantasy_trade
 
 load_dotenv()
 sql_passcode = os.getenv('SQL_PASSWORD')
@@ -66,6 +67,27 @@ def update_roster():
 
     # Process the player names
     return jsonify({"status": "success", "feedback": openai_response})
+
+# Get players staged for trade analysis and call language model response.
+@app.route('/api/analyze-trade', methods=['POST'])
+def get_players_for_trade():
+    data = request.json
+
+    try:
+        team_a_players = data['teamA']
+        team_b_players = data['teamB']
+        
+        # Call the function from insight_api.py
+        ai_analysis = analyze_fantasy_trade(team_a_players, team_b_players)
+        return jsonify({"status": "success", "feedback": ai_analysis})
+    
+    except KeyError:
+        # Handle cases where teamA or teamB data is not provided
+        return jsonify({"status": "error", "message": "Missing player data in request"}), 400
+    
+    except Exception as e:
+        # Handle any other exceptions
+        return jsonify({"status": "error", "message": str(e)}), 500
 
 # Test connection to frontend
 @app.route('/test')
