@@ -249,7 +249,7 @@ const MainContent = () => {
                 ))}
                 {isTeamBuilding && <th>Add Player</th>} {/* Conditionally render add player header */}
                 {(slotForComparison === 'playerOne' || slotForComparison === 'playerTwo') && <th>Compare</th>} {/* Conditional header for Compare */}
-                {(slotForComparison === 'Receiving' || slotForComparison === 'Giving') && <th>Trade</th>} {/* Conditional header for Trades*/}
+                {isTrading && <th>Trade</th>} {/* Conditional header for Trades*/}
             </tr>
         </thead>
     );

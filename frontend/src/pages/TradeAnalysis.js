@@ -35,7 +35,7 @@ const TradeAnalysis = () => {
     };
 
     return (
-        <div className='main-content-container'>
+        <div className='trade-content-container'>
             <h1 className='compare-title'>Trade Analysis</h1>
             <div className='trade-analysis-container'>
                 <div className="trade-column">

@@ -1,3 +1,21 @@
+.trade-content-container {
+    padding: 20px;
+    background: url('../components/photos/AI-nfl-bg2.webp') no-repeat center center fixed; 
+    background-size: cover;
+    background-color: #a4c1c3;
+    color: #334155;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 1080px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    overflow-x: auto;
+    max-width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
 .trade-analysis-container {
     display: flex;
     justify-content: center;
@@ -5,33 +23,38 @@
   }
   
   .trade-column {
-    background-color: #fff;
-    border: 1px solid #ddd; 
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid black; 
     border-radius: 4px;
     width: 300px;
-    margin: 0 10px; /* Spacing between the two columns */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* subtle shadow */
+    margin: 0 15px; /* Spacing between the two columns */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+  }
+
+  .trade-list-item:hover {
+    background-color: rgba(0, 0, 0, 0.05);
   }
   
   .trade-column-header {
-    background-color: #f76d6d; /* Red header background */
-    color: #fff; /* White text color */
+    background-color: #d02525; 
+    color: #fff; 
     padding: 10px;
     text-align: center;
-    border-top-left-radius: 4px; /* Rounded corners for the header */
+    border-top-left-radius: 4px; 
     border-top-right-radius: 4px;
     font-weight: bold;
   }
   
   .trade-list {
-    list-style-type: none; /* Remove default list styling */
+    list-style-type: none;
     padding: 0;
     margin: 0;
   }
   
   .trade-list-item {
+    background-color: white;
     padding: 10px;
-    border-bottom: 1px solid #ddd; /* Light gray border for each item */
+    border-bottom: 1px solid #ddd;
     display: flex;
     align-items: center;
   }
