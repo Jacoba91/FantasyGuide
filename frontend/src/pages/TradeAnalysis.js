@@ -28,7 +28,8 @@ const extractPlayerNamesFromTrade = (tradeData) => {
 };
 
 // Function to send 'players for trade' names to the backend
-const sendTradesToBackend = async (teamAPlayers, teamBPlayers, setFeedbackFn) => {
+const sendTradesToBackend = async (teamAPlayers, teamBPlayers, setFeedbackFn, setIsLoadingFn) => {
+    setIsLoadingFn(true);
     try {
         const response = await fetch('http://127.0.0.1:5000/api/analyze-trade', {
             method: 'POST',
@@ -47,6 +48,7 @@ const sendTradesToBackend = async (teamAPlayers, teamBPlayers, setFeedbackFn) =>
         console.log('Success:', data);
     } catch (error) {
         console.error('Error:', error);
+        setIsLoadingFn(false);
     }
 };
 
@@ -55,9 +57,11 @@ const TradeAnalysis = () => {
     const { trade } = useContext(TeamContext); // Accessing trade state
     const { teamA, teamB } = extractPlayerNamesFromTrade(trade);
     const [feedback, setFeedback] = useState(null);  // State to hold feedback
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleTradeAnalysis = async () => {
-        await sendTradesToBackend(teamA, teamB, setFeedback);
+        await sendTradesToBackend(teamA, teamB, setFeedback, setIsLoading);
+        setIsLoading(false);
     };
 
     const handleSelectPlayers = (slotType, index) => {
@@ -97,7 +101,18 @@ const TradeAnalysis = () => {
                     {renderTradeSlots('get')}
                 </div>
             </div>
-            {feedback ? (
+            {isLoading ? (
+                <div class="dot-spinner">
+                    <div class="dot-spinner__dot"></div>
+                    <div class="dot-spinner__dot"></div>
+                    <div class="dot-spinner__dot"></div>
+                    <div class="dot-spinner__dot"></div>
+                    <div class="dot-spinner__dot"></div>
+                    <div class="dot-spinner__dot"></div>
+                    <div class="dot-spinner__dot"></div>
+                    <div class="dot-spinner__dot"></div>
+                </div>
+            ) : feedback ? (
                 <div className="feedback-container">
                     <h2>Trade Analysis Feedback</h2>
                     <p>{feedback}</p>
