@@ -11,6 +11,7 @@ import MainContent from './pages/MainContent';
 import TeamBuilder from './pages/TeamBuilder';
 import PlayerComparer from './pages/PlayerComparer';
 import TradeAnalysis from './pages/TradeAnalysis';
+import NewsFeed from './pages/NewsFeed';
 
 
 function App() {
@@ -20,13 +21,13 @@ function App() {
                 <ComparisonProvider>
                     <Router>
                         <Header></Header>
-                        
                             <Routes>
                                 <Route path="/" element={<WelcomePage />} />
                                 <Route path="/home" element={<MainContent />} />
                                 <Route path="/compare" element={<PlayerComparer />} />
                                 <Route path="/team-builder" element={<TeamBuilder />} />
                                 <Route path="/trade-analysis" element={<TradeAnalysis />} />
+                                <Route path="/news" element={<NewsFeed />} />
                             </Routes>
                     </Router>
                 </ComparisonProvider>

@@ -1,3 +1,5 @@
+import traceback
+
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 import os
@@ -9,6 +11,7 @@ import pymysql.cursors
 
 from insight_api import get_openai_response
 from trade_insight import analyze_fantasy_trade
+from get_news import extract_info_to_json
 
 load_dotenv()
 sql_passcode = os.getenv('SQL_PASSWORD')
@@ -89,10 +92,14 @@ def get_players_for_trade():
         # Handle any other exceptions
         return jsonify({"status": "error", "message": str(e)}), 500
 
-# Test connection to frontend
-@app.route('/test')
-def test_connection():
-    return {"message": "Connection successful"}
-
-if __name__ == '__main__':
-    app.run(debug=True)
+@app.route('/news', methods=['GET'])
+def get_newsfeed():
+    try:
+        newsfeed = extract_info_to_json()
+        if newsfeed:
+            return jsonify(newsfeed)
+        else:
+            return jsonify({"error": "No news data available"}), 404
+    except Exception as e:
+        print(traceback.format_exc())
+        return jsonify({"error": "An error occurred while fetching news data"}), 500
