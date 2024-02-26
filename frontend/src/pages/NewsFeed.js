@@ -27,24 +27,28 @@ const NewsFeed = () => {
     }
   
     return (
-        <div>
-          <h1>News Feed</h1>
-          {news.length ? (
-            <ul>
-              {news.map((item, index) => (
-                <li key={index} className="news-item">
-                  <a href={item.link} target="_blank" rel="noopener noreferrer">
-                    <h2>{item.title}</h2>
-                  </a>
-                  <p>{item.description}</p>
-                  <img src={item.imageSrc} alt={item.title} />
-                  {/* Optionally, display the author info and publish date if you have those details */}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>Loading news...</p>
-          )}
+        <div className="news-feed">
+            <h1>News Feed</h1>
+            {news.length ? (
+                <ul>
+                    {news.map((item, index) => (
+                        <li key={index} className="news-item">
+                            <a href={item.link} target="_blank" rel="noopener noreferrer">
+                                <h2>{item.title}</h2>
+                            </a>
+                            {item.image_src !== 'No Image' && (
+                                <div className="news-image-container">
+                                    <img src={item.image_src} alt={item.title} />
+                                </div>
+                            )}
+                            <p className="news-description">{item.description}</p>
+                            <div className="news-author-info">{item.author_info}</div>
+                        </li>
+                    ))}
+                </ul>
+            ) : (
+                <p>Loading news...</p>
+            )}
         </div>
     );
 };
