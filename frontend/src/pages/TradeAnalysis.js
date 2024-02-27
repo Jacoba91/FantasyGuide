@@ -8,22 +8,22 @@ import './TradeAnalysis.css';
 
 // Gather players in each side of trade stage
 const extractPlayerNamesFromTrade = (tradeData) => {
-    let teamAGetPlayerNames = [];
-    let teamBGivePlayerNames = [];
+    let teamBGetPlayerNames = [];
+    let teamAGivePlayerNames = [];
 
     // Extract player names from 'get' array (teamA)
     tradeData.get.forEach(player => {
-        if (player.name) teamAGetPlayerNames.push(player.name);
+        if (player.name) teamBGetPlayerNames.push(player.name);
     });
 
     // Extract player names from 'give' array (teamB)
     tradeData.give.forEach(player => {
-        if (player.name) teamBGivePlayerNames.push(player.name);
+        if (player.name) teamAGivePlayerNames.push(player.name);
     });
 
     return {
-        teamA: teamAGetPlayerNames,
-        teamB: teamBGivePlayerNames
+        teamA: teamAGivePlayerNames,
+        teamB: teamBGetPlayerNames
     };
 };
 
@@ -77,9 +77,12 @@ const TradeAnalysis = () => {
     
                     return (
                         <li key={index} className="trade-list-item" onClick={() => handleSelectPlayers(slotType, index)}>
-                            <img className="profile-photo" src={playerPhoto} alt={playerName} />
                             <div className="player-info">
-                                {`${playerName}`}
+                                <img className="profile-photo" src={playerPhoto} alt={playerName} />
+                                <div className='player-details'>
+                                    <div className="player-name">{playerName}</div>
+                                    <div className="player-position-team">Position, Team</div>
+                                </div>
                             </div>
                         </li>
                     );
@@ -93,11 +96,11 @@ const TradeAnalysis = () => {
             <h1 className='compare-title'>Trade Analysis</h1>
             <div className='trade-analysis-container'>
                 <div className="trade-column">
-                    <div className="trade-column-header">Players To Give</div>
+                    <div className="trade-column-header">Players To Give (A)</div>
                     {renderTradeSlots('give')}
                 </div>
                 <div className="trade-column">
-                    <div className="trade-column-header">Players To Get</div>
+                    <div className="trade-column-header">Players To Get (B)</div>
                     {renderTradeSlots('get')}
                 </div>
             </div>
@@ -118,7 +121,7 @@ const TradeAnalysis = () => {
                     <p>{feedback}</p>
                 </div>
             ) : (
-                <button className="add-player" onClick={handleTradeAnalysis}>Analyze</button>
+                <button className="analyze-button" onClick={handleTradeAnalysis}>Analyze</button>
             )}
         </div>
     );
