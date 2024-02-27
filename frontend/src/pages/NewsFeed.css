@@ -1,0 +1,100 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif; /* or the font-family of your choice */
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  .header {
+    text-align: center;
+    padding: 20px 0;
+  }
+  
+  .header h1 {
+    margin-bottom: 10px;
+  }
+  
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Adjust the gap as needed */
+    justify-content: center;
+  }
+
+  .card a {
+    text-decoration: none; /* This will remove the underline from links */
+    color: inherit; /* Optional: ensures the link color is the same as the text color */
+  }
+  
+  .card {
+    display: flex;
+    flex-direction: column;
+    width: calc(50% - 20px); /* Three cards per row, minus the gap */
+    height: 500px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+    margin-bottom: 20px;
+    text-decoration: none;
+  }
+  
+  .card img {
+    width: 100%; /* Make the image fill the container width */
+    height: 200px; /* Set a fixed height for your images */
+    object-fit: cover; /* Cover the area without stretching the image */
+    object-position: center; /* Center the image within the element */
+  }
+  
+  .card-content {
+    padding: 20px;
+  }
+  
+  .card-content h2 {
+    margin-bottom: 10px;
+    color: #333; /* Adjust color as needed */
+  }
+  
+  .card-content p {
+    color: #666; /* Adjust color as needed */
+    margin-bottom: 20px;
+  }
+
+  .news-author-info {
+    margin: 20px;
+  }
+  
+  .card-action {
+    padding: 10px 20px;
+    background: #007bff; /* Adjust background color as needed */
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    border-radius: 0 0 10px 10px;
+  }
+  
+  .card-action:hover {
+    background: #0056b3; /* Adjust hover color as needed */
+  }
+  
+  @media (max-width: 992px) {
+    .card {
+      width: calc(50% - 20px); /* Two cards per row on smaller screens */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .card {
+      width: 100%; /* Full width on very small screens */
+    }
+  }

@@ -58,7 +58,6 @@ def extract_info_to_json():
     print('----')
 
     if ul:
-        i=0
         list_items = ul.find_all('li', limit=10)
         
         articles = []
@@ -72,7 +71,7 @@ def extract_info_to_json():
                 "title": a_tag.text.strip() if a_tag and a_tag.text else 'No Title',
                 "link": a_tag['href'] if a_tag and 'href' in a_tag.attrs else 'No Link',
                 "image_src": li.find('img')['src'] if li.find('img') and 'src' in li.find('img').attrs else 'No Image',
-                "author_info": li.find('div', class_="C(#959595) Fz(11px) D(ib) Mb(6px)").text if li.find('div', class_="C(#959595) Fz(11px) D(ib) Mb(6px)") else 'No Author Info',
+                "author_info": li.find('div', class_="C(#959595) Fz(11px) D(ib) Mb(6px)").text.replace("•", " • ").strip() if li.find('div', class_="C(#959595) Fz(11px) D(ib) Mb(6px)") else 'No Author Info',
                 "description": li.find('p').text.strip() if li.find('p') and li.find('p').text else 'No Description'
             }
             articles.append(article)
