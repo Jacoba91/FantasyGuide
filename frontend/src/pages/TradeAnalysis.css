@@ -99,7 +99,7 @@
 }
 
 .analyze-button {
-  background-color: #543fa3; 
+  background-color: #2a2a2a; 
   color: white; 
   padding: 10px 24px; 
   border: none; 
@@ -113,7 +113,7 @@
 }
 
 .analyze-button:hover {
-  background-color: #1f1052; 
+  background-color: #4c4c4c; 
 }
 
 /* Load animation */
