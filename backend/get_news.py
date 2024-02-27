@@ -6,14 +6,25 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 
 print('begin \n')
+
 # Setup Selenium WebDriver
+options = Options()
+options.headless = True
+options.add_argument("--disable-gpu")
+options.add_argument("--window-size=1920,1200")
+options.add_argument("--no-sandbox")  # This option may be required if you're running as root/administrator
+options.add_argument("--disable-dev-shm-usage")  # This option is useful in constrained environments like Docker containers
+
+
 service = Service(ChromeDriverManager().install())
-driver = webdriver.Chrome(service=service)
+
+driver = webdriver.Chrome(service=service, options=options)
 driver.get("https://sports.yahoo.com/fantasy/football/news/")
 
 # Wait for the page to load
