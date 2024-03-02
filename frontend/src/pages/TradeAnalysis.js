@@ -95,34 +95,36 @@ const TradeAnalysis = () => {
         <div className='trade-content-container'>
             <h1 className='compare-title'>Trade Analysis</h1>
             <div className='trade-analysis-container'>
-                <div className="trade-column">
-                    <div className="trade-column-header">Players To Give (A)</div>
-                    {renderTradeSlots('give')}
+                <div className='trade-columns-wrapper'>
+                    <div className="trade-column">
+                        <div className="trade-column-header">Players To Give (A)</div>
+                        {renderTradeSlots('give')}
+                    </div>
+                    <div className="trade-column">
+                        <div className="trade-column-header">Players To Get (B)</div>
+                        {renderTradeSlots('get')}
+                    </div>
                 </div>
-                <div className="trade-column">
-                    <div className="trade-column-header">Players To Get (B)</div>
-                    {renderTradeSlots('get')}
-                </div>
+                {isLoading ? (
+                    <div class="dot-spinner">
+                        <div class="dot-spinner__dot"></div>
+                        <div class="dot-spinner__dot"></div>
+                        <div class="dot-spinner__dot"></div>
+                        <div class="dot-spinner__dot"></div>
+                        <div class="dot-spinner__dot"></div>
+                        <div class="dot-spinner__dot"></div>
+                        <div class="dot-spinner__dot"></div>
+                        <div class="dot-spinner__dot"></div>
+                    </div>
+                ) : feedback ? (
+                    <div className="feedback-container">
+                        <h2>Trade Analysis Feedback</h2>
+                        <p>{feedback}</p>
+                    </div>
+                ) : (
+                    <button className="analyze-button" onClick={handleTradeAnalysis}>Analyze Trade</button>
+                )}
             </div>
-            {isLoading ? (
-                <div class="dot-spinner">
-                    <div class="dot-spinner__dot"></div>
-                    <div class="dot-spinner__dot"></div>
-                    <div class="dot-spinner__dot"></div>
-                    <div class="dot-spinner__dot"></div>
-                    <div class="dot-spinner__dot"></div>
-                    <div class="dot-spinner__dot"></div>
-                    <div class="dot-spinner__dot"></div>
-                    <div class="dot-spinner__dot"></div>
-                </div>
-            ) : feedback ? (
-                <div className="feedback-container">
-                    <h2>Trade Analysis Feedback</h2>
-                    <p>{feedback}</p>
-                </div>
-            ) : (
-                <button className="analyze-button" onClick={handleTradeAnalysis}>Analyze</button>
-            )}
         </div>
     );
 };

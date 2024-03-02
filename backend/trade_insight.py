@@ -14,7 +14,7 @@ def analyze_fantasy_trade(team_a_players, team_b_players):
     team_a_string = ', '.join(team_a_players)
     team_b_string = ', '.join(team_b_players)
 
-    trade_analysis_query = f"Analyze the following fantasy football trade. Team A is trading {team_a_string} to Team B for {team_b_string}. Provide a detailed analysis of how this trade would impact both teams for the rest of the fantasy season."
+    trade_analysis_query = f"Analyze the following fantasy football trade. Team A is trading {team_a_string} to Team B for {team_b_string}. Provide a detailed analysis of how this trade would impact both teams for the rest of the fantasy season, in a full PPR league. Predict the winner of the trade, irrespective of the unknown rest of lineups"
 
     response = client.chat.completions.create(
         model="gpt-4",
