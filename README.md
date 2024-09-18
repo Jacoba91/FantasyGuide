@@ -1,4 +1,5 @@
 FantasyGuide: Personal fantasy football assitant.
+This project is a demo/proof of concept.
 
 To run this project (dev build),
 1. Ensure all dependencies installed, such as Flask, node.js, react,...)
